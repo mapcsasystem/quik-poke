@@ -6,14 +6,12 @@ export default component$(() => {
   // !Dos formas de mantener estado las useSignal solomanejan un valor y useStore maneja un obketo y/o arreglo
 
   const pokemonId = useSignal<number>(1); // *Solo usar datos primitivos numeros , string , boolean
+  const showImage = useSignal<boolean>(true);
   // ! para solo mostrar el valor <span class="text-9xl">{pokemonId}</span>
   // ! para poder cambiar el valor <span class="text-9xl">{pokemonId.value+1}</span>
   // ! para serializar la funcion se pone $( funcion  )
   const changePokemonId = $((value: number) => {
-    if ((pokemonId.value += value) <= 0) {
-      return;
-    }
-    pokemonId.value += value;
+    pokemonId.value = pokemonId.value + value;
   });
 
   return (
@@ -21,7 +19,7 @@ export default component$(() => {
       <span class="text-2xl">Buscador simple</span>
       <span class="text-9xl">{pokemonId}</span>
       {/* !para obtener el valor del usesignal que es pokemonId siempre se       utiliza el value ejemplo: pokemonId.value */}
-      <PokemonImage id={pokemonId.value} />
+      <PokemonImage id={pokemonId.value} backImage={showImage.value} />
       {/* para mutar del usesignal que es pokemonId siempre se utiliza el value   ejemplo: pokemonId.value++ 'ó' pokemonId.value-- */}
       <div class="mt-2">
         <button
@@ -32,8 +30,18 @@ export default component$(() => {
           Anterior
         </button>
 
-        <button class=" btn btn-primary" onClick$={() => changePokemonId(1)}>
+        <button
+          class=" btn btn-primary mr-2"
+          onClick$={() => changePokemonId(+1)}
+        >
           Siguiente
+        </button>
+
+        <button
+          class=" btn btn-primary"
+          onClick$={() => (showImage.value = !showImage.value)}
+        >
+          voltear
         </button>
       </div>
       ´
