@@ -5,7 +5,7 @@ import { PokemonImage } from "~/components/pokemonImage";
 export default component$(() => {
   // !Dos formas de mantener estado las useSignal solomanejan un valor y useStore maneja un obketo y/o arreglo
 
-  const pokemonId = useSignal<number>(1); // *Solo usar datos primitivos numeros , string , boolean
+  const pokemonId = useSignal<number>(0); // *Solo usar datos primitivos numeros , string , boolean
   const showImage = useSignal<boolean>(true);
   // ! para solo mostrar el valor <span class="text-9xl">{pokemonId}</span>
   // ! para poder cambiar el valor <span class="text-9xl">{pokemonId.value+1}</span>
